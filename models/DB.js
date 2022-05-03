@@ -76,6 +76,10 @@ module.exports = class DB {
     );
     if (rows.length > 0) return;
 
+    await this.connection.query("SET autocommit=0;");
+    await this.connection.query("SET unique_checks=0;");
+    await this.connection.query("SET foreign_key_checks=0;");
+
     console.time("insert");
     let users = [];
     let images = [];
@@ -106,6 +110,12 @@ module.exports = class DB {
     }
 
     console.timeEnd("insert");
+
+    await this.connection.query("SET autocommit=1;");
+    await this.connection.query("SET unique_checks=1;");
+    await this.connection.query("SET foreign_key_checks=1;");
+
+    await this.disconnect();
   }
 
   async create_database() {

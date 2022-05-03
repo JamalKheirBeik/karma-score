@@ -20,6 +20,6 @@ app.listen(process.env.PORT, async () => {
   // init the database
   let db = new DB();
   await db.init();
-  await db.generateDummyData(100000, 25000);
+  await db.generateDummyData(1000000, 25000); // inserting 1 million rows on 25k chunks
   await db.disconnect();
 });
