@@ -1,0 +1,28 @@
+{{#if error.length}}
+  <h1>{{error}}</h1>
+{{else}}
+  {{#if data.length}}
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+      {{#each data}}
+        <tr>
+          {{#with this}}
+            <td>{{rank}}</td>
+            <td>
+              <img src="/images/{{url}}" alt="{{url}}" />
+            </td>
+            <td>{{username}}</td>
+            <td>{{karma_score}}</td>
+          {{/with}}
+        </tr>
+      {{/each}}
+    </table>
+  {{else}}
+    <h1>no data</h1>
+  {{/if}}
+{{/if}}
