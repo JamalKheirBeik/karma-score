@@ -1,8 +1,9 @@
 # Getting started
 
-Clone the repository and run this command in console.
+Clone the repository and run these commands in console.
 
 ```bash
+    npm install
     npm start
 ```
 
