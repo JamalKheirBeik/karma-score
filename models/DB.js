@@ -86,19 +86,16 @@ module.exports = class DB {
     for (let i = 1; i <= number_of_rows; i++) {
       if (i % chunk == 0) {
         images.push(["ImageURL" + i]);
+        users.push(["user" + i, Math.floor(Math.random() * 50001), i]);
         await this.connection.query("INSERT INTO images(url) VALUES ?", [
           images,
         ]);
         images = [];
-        users.push(["user" + i, Math.floor(Math.random() * 50001), i]);
         await this.connection.query(
           "INSERT INTO users(username, karma_score, image_id) VALUES ?",
           [users]
         );
         users = [];
-      } else {
-        images.push(["ImageURL" + i]);
-        users.push(["user" + i, Math.floor(Math.random() * 50001), i]);
       }
     }
     if (users.length > 0) {
@@ -108,7 +105,6 @@ module.exports = class DB {
         [users]
       );
     }
-
     console.timeEnd("insert");
 
     await this.connection.query("SET autocommit=1;");
